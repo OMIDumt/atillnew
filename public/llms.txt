@@ -1,0 +1,13 @@
+# ATiLLAi
+
+> ATiLLAi — مرجع تخصصی مشاوره و اجرای پروژه‌های هوش مصنوعی، یادگیری ماشین، یادگیری عمیق و آمار برای دانشجویان، صنعت و دانشگاه.
+
+ATiLLAi delivers AI / ML / DL and statistics consulting and implementation for students, enterprises, and academic teams. The site lists services, sample projects, and ready-to-buy apps.
+
+## Pages
+- [Home](/): مرور خدمات و معرفی ATiLLAi
+- [Services](/services): فهرست خدمات مشاوره و اجرای پروژه
+- [Projects](/projects): نمونه پروژه‌های صنعتی، پزشکی، دانشگاهی
+- [Apps](/apps): اپلیکیشن‌ها و محصولات آماده
+- [About](/about): درباره تیم ATiLLAi
+- [Contact](/contact): راه‌های ارتباط و ثبت سفارش

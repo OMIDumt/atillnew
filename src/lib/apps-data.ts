@@ -1,0 +1,285 @@
+import {
+  HeartPulse, MessageCircle, ShoppingBag, Camera, Mic, GraduationCap, Briefcase,
+  MapPin, Smile, Eye, Scale, Baby, Pill, Dumbbell, Brain, Leaf,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+export type AppDetail = {
+  slug: string;
+  title: string;
+  cat: string;
+  short: string;
+  longDesc: string;
+  features: string[];
+  tech: string[];
+  icon: LucideIcon;
+  color: string;
+  screens: { title: string; subtitle: string; variant: "phone" | "dashboard" | "card" }[];
+  price?: string;
+};
+
+export const APPS: AppDetail[] = [
+  {
+    slug: "skin-diagnosis",
+    title: "اپ تشخیص بیماری پوست",
+    cat: "پزشکی",
+    short: "تشخیص آنی ضایعات پوستی با Vision Transformer روی دیوایس.",
+    longDesc: "اپلیکیشن موبایلی برای تشخیص اولیه ۱۲ بیماری شایع پوستی (ملانوما، اگزما، آکنه و...) با دقت بالای ۹۲٪ که کاملاً روی دستگاه اجرا می‌شود و نیازی به ارسال تصویر به سرور ندارد. مناسب برای پزشکان عمومی و کاربر نهایی.",
+    features: ["تشخیص On-Device بدون اینترنت", "حفظ حریم خصوصی کامل", "گزارش PDF برای ارجاع به متخصص", "تاریخچه تصاویر بیمار", "چندزبانه (فارسی/انگلیسی/ترکی)"],
+    tech: ["Flutter", "TFLite", "EfficientNet", "SQLite", "Python", "Docker", "NumPy", "Git"],
+    icon: HeartPulse, color: "from-pink-500 to-rose-500",
+    screens: [
+      { title: "اسکن ضایعه", subtitle: "دوربین + راهنمای زاویه", variant: "phone" },
+      { title: "نتیجه تشخیص", subtitle: "احتمال + توضیحات", variant: "phone" },
+      { title: "تاریخچه بیمار", subtitle: "روند تغییرات", variant: "phone" },
+    ],
+  },
+  {
+    slug: "dental-ai",
+    title: "اپ دندانپزشکی هوشمند",
+    cat: "پزشکی",
+    short: "تشخیص پوسیدگی، عفونت و مشکلات لثه از تصاویر دندان و رادیوگرافی پانورامیک.",
+    longDesc: "دستیار هوشمند دندانپزشک با قابلیت تحلیل خودکار رادیوگرافی پانورامیک و پری‌اپیکال، شناسایی پوسیدگی، آبسه، ایمپلنت و طراحی پلن درمان. مناسب کلینیک‌های دندانپزشکی و آموزش دانشجویان.",
+    features: ["تشخیص پوسیدگی روی X-Ray", "شناسایی ایمپلنت و ترمیم", "طراحی پلن درمان خودکار", "گزارش بصری برای بیمار", "اتصال به نرم‌افزار کلینیک"],
+    tech: ["Flutter", "PyTorch", "U-Net", "FastAPI", "PostgreSQL", "Python", "Docker", "NumPy", "Git"],
+    icon: Smile, color: "from-cyan-500 to-teal-500",
+    screens: [
+      { title: "X-Ray Analyzer", subtitle: "تحلیل پانورامیک", variant: "phone" },
+      { title: "پلن درمان", subtitle: "اولویت‌بندی هوشمند", variant: "phone" },
+      { title: "گزارش بیمار", subtitle: "نمای ساده و گرافیکی", variant: "phone" },
+    ],
+  },
+  {
+    slug: "mammo-ai",
+    title: "اپ دستیار هوشمند ماموگرافی",
+    cat: "پزشکی",
+    short: "تحلیل خودکار تصاویر ماموگرافی با هوش مصنوعی، ارزیابی ریسک و گزارش BI-RADS.",
+    longDesc: "Mammo AI دستیار هوشمند رادیولوژیست برای تحلیل تصاویر ماموگرافی است. شناسایی ناهنجاری‌ها و ضایعات مشکوک، دسته‌بندی بر اساس BI-RADS، مقایسه با تصاویر قبلی بیمار و تولید گزارش ساختاریافته با خروجی PDF.",
+    features: ["تشخیص خودکار توده و ناحیه مشکوک", "دسته‌بندی BI-RADS با دقت بالا", "مقایسه هوشمند با تصاویر قبلی بیمار", "گزارش ساختاریافته PDF برای ارجاع", "حفاظت کامل داده‌های بیمار"],
+    tech: ["PyTorch", "Vision Transformer", "FastAPI", "DICOM", "Next.js", "PostgreSQL", "Docker", "Python"],
+    icon: HeartPulse, color: "from-fuchsia-500 to-purple-600",
+    screens: [
+      { title: "صفحه اصلی Mammo AI", subtitle: "دستیار هوشمند ماموگرافی", variant: "phone" },
+      { title: "تحلیل ماموگرافی", subtitle: "هایلایت ناحیه مشکوک + BI-RADS", variant: "dashboard" },
+      { title: "گزارش ساختاریافته", subtitle: "خروجی PDF برای پزشک و بیمار", variant: "card" },
+      { title: "مقایسه در طول زمان", subtitle: "تصویر فعلی و قبلی", variant: "dashboard" },
+    ],
+  },
+  {
+    slug: "ophthalmology-app",
+    title: "اپ چشم‌پزشکی هوشمند",
+    cat: "پزشکی",
+    short: "غربالگری رتینوپاتی، گلوکوم و کاتاراکت با تصاویر فوندوس و OCT.",
+    longDesc: "اپلیکیشن تخصصی برای چشم‌پزشکان و اپتومتریست‌ها که با اتصال به دوربین فوندوس موبایل، بیماری‌های رایج شبکیه را غربالگری می‌کند. مناسب کمپین‌های غربالگری دیابتی و کلینیک‌های دور.",
+    features: ["تشخیص ۵ سطح رتینوپاتی", "غربالگری گلوکوم از Cup-to-Disc Ratio", "کنترل کیفیت تصویر فوندوس", "ادغام با Volk و Optomed", "گزارش ارجاع فوری"],
+    tech: ["React Native", "TFLite", "EfficientNet", "DICOM", "Python", "Docker", "NumPy", "Git"],
+    icon: Eye, color: "from-amber-500 to-orange-500",
+    screens: [
+      { title: "هیرو اپ چشم‌پزشکی", subtitle: "تشخیص سریع و دقیق با هوش مصنوعی", variant: "dashboard" },
+      { title: "اسکن فوندوس", subtitle: "تشخیص رتینوپاتی دیابتی با احتمال ۸۷٪", variant: "dashboard" },
+      { title: "گزارش هوشمند AI", subtitle: "Risk Score و احتمال بیماری", variant: "dashboard" },
+      { title: "آرشیو بیماران", subtitle: "جستجو و پیگیری ویزیت‌ها", variant: "dashboard" },
+      { title: "Live Demo", subtitle: "مشاهده عملکرد زنده مدل آتیلای", variant: "dashboard" },
+      { title: "بررسی توسط پزشک", subtitle: "مزایای اپ در محیط کلینیک", variant: "dashboard" },
+      { title: "دقت مدل ۹۵.۴٪", subtitle: "تأیید‌شده توسط داده‌های بالینی", variant: "dashboard" },
+      { title: "امنیت و ذخیره‌سازی ابری", subtitle: "رمزنگاری در سطح سازمانی", variant: "dashboard" },
+    ],
+  },
+  {
+    slug: "legal-assistant",
+    title: "اپ دستیار حقوقی هوشمند",
+    cat: "حقوقی",
+    short: "پاسخگو به سؤالات حقوقی، تنظیم قرارداد و آنالیز پرونده با LLM فارسی.",
+    longDesc: "دستیار حقوقی مبتنی بر LLM Fine-tune شده روی قوانین ایران، آرای دیوان عالی و قرارداد‌های استاندارد. مناسب وکلا، دانشجویان حقوق و کاربر عمومی برای دریافت مشاوره اولیه و پیش‌نویس قرارداد.",
+    features: ["پاسخ به سؤالات حقوقی فارسی", "تولید پیش‌نویس قرارداد", "خلاصه‌سازی پرونده", "جستجو در مجموعه قوانین", "تخمین زمان و هزینه دادرسی"],
+    tech: ["React Native", "LLaMA 3", "RAG", "Pinecone", "FastAPI", "Python", "Docker", "NumPy", "Git"],
+    icon: Scale, color: "from-violet-500 to-purple-500",
+    screens: [
+      { title: "چت حقوقی", subtitle: "پرسش و پاسخ آنی", variant: "phone" },
+      { title: "تولید قرارداد", subtitle: "بر اساس فرم ساده", variant: "phone" },
+      { title: "جستجوی قانون", subtitle: "مرتبط با مسئله شما", variant: "phone" },
+    ],
+  },
+  {
+    slug: "pediatric-symptom-checker",
+    title: "اپ تشخیص علائم کودکان",
+    cat: "پزشکی",
+    short: "راهنمای والدین برای ارزیابی سریع علائم تب، جوش و رفتارهای نگران‌کننده کودک.",
+    longDesc: "اپ AI ویژه والدین که با چند سؤال ساده درباره علائم کودک، اولویت اقدام (مراجعه فوری، عمومی، استراحت در منزل) را پیشنهاد می‌دهد. مبتنی بر گایدلاین‌های AAP و WHO با لوکالایز فارسی.",
+    features: ["ارزیابی هوشمند علائم", "هشدار اورژانس", "تقویم واکسیناسیون", "رشد و قد/وزن", "کتابخانه آموزشی والدین"],
+    tech: ["Flutter", "Decision Tree + LLM", "Firebase", "Python", "Docker", "NumPy", "Git"],
+    icon: Baby, color: "from-rose-500 to-pink-400",
+    screens: [
+      { title: "ارزیابی علائم", subtitle: "سؤال‌های هوشمند", variant: "phone" },
+      { title: "توصیه اقدام", subtitle: "اورژانس یا منزل", variant: "phone" },
+      { title: "تقویم واکسن", subtitle: "یادآور خودکار", variant: "phone" },
+    ],
+  },
+  {
+    slug: "pill-identifier",
+    title: "اپ تشخیص دارو از تصویر",
+    cat: "پزشکی",
+    short: "شناسایی قرص و دارو از روی شکل، رنگ و حک با دوربین موبایل.",
+    longDesc: "اپ کمک به بیماران سالمند و داروسازان برای شناسایی سریع داروها از روی ظاهر آن‌ها، همراه با تداخل دارویی، عوارض و دوز مصرف. متصل به دیتابیس IFDA و FDA.",
+    features: ["تشخیص دارو از عکس", "تداخل دارویی هوشمند", "یادآور مصرف", "آرشیو نسخه‌ها", "حالت سالمندی (فونت بزرگ)"],
+    tech: ["Flutter", "CLIP", "OCR", "SQLite", "Python", "Docker", "NumPy", "Git"],
+    icon: Pill, color: "from-emerald-500 to-green-500",
+    screens: [
+      { title: "اسکن قرص", subtitle: "دوربین + تشخیص", variant: "phone" },
+      { title: "اطلاعات دارو", subtitle: "تداخل + دوز", variant: "phone" },
+      { title: "یادآور مصرف", subtitle: "تقویم روزانه", variant: "phone" },
+    ],
+  },
+  {
+    slug: "mental-health-companion",
+    title: "اپ همراه سلامت روان",
+    cat: "پزشکی",
+    short: "ژورنال احساسات + چت‌بات روان‌شناسی CBT با LLM فارسی.",
+    longDesc: "اپلیکیشن سلامت روان با چت‌بات مبتنی بر CBT، ردیابی خلق و خو، تمرین‌های مدیتیشن و گزارش هفتگی به روان‌شناس. مناسب کاربر عمومی و کلینیک‌های روان‌درمانی.",
+    features: ["چت‌بات CBT فارسی", "ژورنال خلق روزانه", "تمرینات Mindfulness", "گزارش به روان‌شناس", "هشدار بحران"],
+    tech: ["Flutter", "GPT-4", "LangChain", "Firebase", "Python", "Docker", "NumPy", "Git"],
+    icon: Brain, color: "from-indigo-500 to-violet-500",
+    screens: [
+      { title: "چت همدلانه", subtitle: "گفتگو با AI", variant: "phone" },
+      { title: "Mood Tracker", subtitle: "نمودار هفتگی", variant: "phone" },
+      { title: "تمرین تنفس", subtitle: "Mindfulness Guide", variant: "phone" },
+    ],
+  },
+  {
+    slug: "fitness-coach-ai",
+    title: "اپ مربی بدنسازی AI",
+    cat: "سلامت",
+    short: "تشخیص فرم تمرین از دوربین و تصحیح بلادرنگ حرکات.",
+    longDesc: "مربی هوشمند بدنسازی که با MediaPipe و Pose Estimation فرم تمرین کاربر را تحلیل می‌کند، اشتباهات را علامت می‌زند و برنامه تمرینی شخصی‌سازی شده ارائه می‌دهد.",
+    features: ["تشخیص فرم Real-time", "شمارش تکرار خودکار", "برنامه شخصی‌سازی", "ردیابی پیشرفت", "Voice Coaching فارسی"],
+    tech: ["Flutter", "MediaPipe", "TFLite", "Firebase", "Python", "Docker", "NumPy", "Git"],
+    icon: Dumbbell, color: "from-orange-500 to-red-500",
+    screens: [
+      { title: "Form Analyzer", subtitle: "دوربین + اسکلت", variant: "phone" },
+      { title: "برنامه روز", subtitle: "تمرین + ست", variant: "phone" },
+      { title: "پیشرفت", subtitle: "آمار + رتبه", variant: "phone" },
+    ],
+  },
+  {
+    slug: "persian-llm-assistant",
+    title: "دستیار هوشمند فارسی با LLM",
+    cat: "دستیار AI",
+    short: "چت‌بات سازمانی فارسی مبتنی بر LLaMA با RAG روی اسناد داخلی.",
+    longDesc: "دستیار سازمانی که با اتصال به اسناد، ویکی و دیتابیس شرکت، به سؤالات کارمندان پاسخ می‌دهد. مناسب پشتیبانی داخلی، آموزش پرسنل و KB سازمانی.",
+    features: ["RAG روی اسناد PDF/Word", "Voice Input فارسی", "ادغام Slack/Teams", "آنالیتیکس مکالمات", "نقش‌بندی کاربران"],
+    tech: ["React Native", "LLaMA 3", "LangChain", "Pinecone", "FastAPI", "Python", "Docker", "NumPy", "Git"],
+    icon: MessageCircle, color: "from-cyan-500 to-blue-500",
+    screens: [
+      { title: "چت تخصصی", subtitle: "پاسخ از اسناد شما", variant: "phone" },
+      { title: "آپلود سند", subtitle: "RAG خودکار", variant: "phone" },
+      { title: "Analytics", subtitle: "آمار استفاده", variant: "dashboard" },
+    ],
+  },
+  {
+    slug: "ecommerce-recommender",
+    title: "اپ فروشگاهی با توصیه‌گر AI",
+    cat: "فروشگاهی",
+    short: "موتور پیشنهاد محصول + جستجوی سمنتیک + تشخیص محصول از تصویر.",
+    longDesc: "پلتفرم اپ فروشگاهی کامل با موتور توصیه‌گر شخصی‌سازی شده، جستجوی هوشمند با CLIP و تشخیص محصول از تصویر دوربین. آماده برای استارتاپ‌های e-commerce.",
+    features: ["توصیه شخصی‌سازی", "Visual Search با عکس", "Voice Search فارسی", "Push Notification هوشمند", "پنل ادمین کامل"],
+    tech: ["Flutter", "TFLite", "CLIP", "Firebase", "Stripe", "Python", "Docker", "NumPy", "Git"],
+    icon: ShoppingBag, color: "from-amber-500 to-orange-500",
+    screens: [
+      { title: "Home شخصی", subtitle: "برای شما", variant: "phone" },
+      { title: "Visual Search", subtitle: "جستجو با عکس", variant: "phone" },
+      { title: "سبد خرید", subtitle: "Checkout سریع", variant: "phone" },
+    ],
+  },
+  {
+    slug: "plate-recognition",
+    title: "اپ شمارش پلاک خودرو",
+    cat: "بینایی ماشین",
+    short: "ANPR بلادرنگ فارسی برای پارکینگ‌های هوشمند روی موبایل.",
+    longDesc: "اپ تشخیص و OCR پلاک خودروی ایرانی روی موبایل، با سرعت بالا و دقت ۹۸٪. مناسب پارکینگ‌ها، شرکت‌های لجستیک و پلیس راهور.",
+    features: ["تشخیص پلاک فارسی", "ذخیره خودکار ورود/خروج", "گزارش روزانه", "حالت Batch روی فیلم", "اکسپورت Excel"],
+    tech: ["Kotlin", "YOLOv8", "PaddleOCR", "Room", "Python", "Docker", "NumPy", "Git"],
+    icon: Camera, color: "from-purple-500 to-indigo-500",
+    screens: [
+      { title: "اسکن پلاک", subtitle: "دوربین زنده", variant: "phone" },
+      { title: "آرشیو خودروها", subtitle: "ورود/خروج", variant: "phone" },
+      { title: "گزارش", subtitle: "اکسپورت اکسل", variant: "phone" },
+    ],
+  },
+  {
+    slug: "persian-stt",
+    title: "اپ تبدیل گفتار به متن فارسی",
+    cat: "صوت",
+    short: "STT آفلاین فارسی با Whisper Fine-tune و تشخیص گوینده.",
+    longDesc: "اپ حرفه‌ای پیاده‌سازی صوت، تبدیل جلسات و مصاحبه‌ها به متن دقیق فارسی با Speaker Diarization و خروجی Word/SRT. مناسب خبرنگاران، وکلا و دانشجویان.",
+    features: ["پیاده‌سازی آفلاین", "تشخیص گوینده", "خروجی Word/SRT/PDF", "خلاصه‌سازی خودکار با LLM", "ترجمه به انگلیسی"],
+    tech: ["Flutter", "Whisper", "ONNX", "Pyannote", "Python", "Docker", "NumPy", "Git"],
+    icon: Mic, color: "from-emerald-500 to-teal-500",
+    screens: [
+      { title: "ضبط جلسه", subtitle: "Real-time Transcript", variant: "phone" },
+      { title: "ویرایش متن", subtitle: "Speaker Tagged", variant: "phone" },
+      { title: "خروجی", subtitle: "Word/SRT/PDF", variant: "phone" },
+    ],
+  },
+  {
+    slug: "ai-tutor",
+    title: "پلتفرم AI Tutor",
+    cat: "آموزشی",
+    short: "معلم خصوصی هوشمند گام به گام برای دانش‌آموزان.",
+    longDesc: "اپلیکیشن آموزش شخصی‌سازی با LLM که سؤالات ریاضی، فیزیک و شیمی دانش‌آموز را گام به گام حل می‌کند. شامل سیستم تمرین تطبیقی و گزارش به والدین.",
+    features: ["حل گام به گام مسئله", "تمرین تطبیقی هوشمند", "گزارش به والدین", "OCR از روی برگه", "محتوای ویدیویی"],
+    tech: ["React Native", "GPT-4", "LangChain", "Manim", "Python", "Docker", "NumPy", "Git"],
+    icon: GraduationCap, color: "from-fuchsia-500 to-purple-500",
+    screens: [
+      { title: "حل مسئله", subtitle: "گام به گام", variant: "phone" },
+      { title: "OCR مسئله", subtitle: "اسکن از کتاب", variant: "phone" },
+      { title: "گزارش رشد", subtitle: "تحلیل نقاط ضعف", variant: "phone" },
+    ],
+  },
+  {
+    slug: "smart-crm",
+    title: "اپ CRM هوشمند",
+    cat: "کسب‌وکار",
+    short: "CRM موبایلی با پیش‌بینی نرخ تبدیل و توصیه اقدام بعدی.",
+    longDesc: "مدیریت مشتری همراه با AI: امتیازدهی Lead، پیش‌بینی نرخ تبدیل، توصیه اقدام بعدی و خلاصه‌سازی خودکار مکالمات تلفنی. مناسب تیم‌های فروش B2B.",
+    features: ["Lead Scoring هوشمند", "Next Best Action", "Call Summary خودکار", "Pipeline Forecast", "Integration با CRM موجود"],
+    tech: ["Flutter", "XGBoost", "FastAPI", "PostgreSQL", "Python", "Docker", "NumPy", "Git"],
+    icon: Briefcase, color: "from-sky-500 to-blue-500",
+    screens: [
+      { title: "Pipeline View", subtitle: "Kanban + امتیاز", variant: "phone" },
+      { title: "پروفایل Lead", subtitle: "+ توصیه اقدام", variant: "phone" },
+      { title: "Forecast", subtitle: "پیش‌بینی فروش", variant: "phone" },
+    ],
+  },
+  {
+    slug: "tourism-guide",
+    title: "اپ راهنمای گردشگری AI",
+    cat: "گردشگری",
+    short: "راهنمای صوتی مکان‌های تاریخی با LLM، GPS و واقعیت افزوده.",
+    longDesc: "همراه گردشگری هوشمند که با تشخیص موقعیت GPS، اطلاعات تاریخی مکان را به صورت صوتی روایت می‌کند، با AR اشیا را معرفی می‌کند و تور شخصی‌سازی پیشنهاد می‌دهد.",
+    features: ["راوی صوتی فارسی/انگلیسی", "AR Information Overlay", "تور شخصی‌سازی", "نقشه آفلاین", "بوکینگ بلیط"],
+    tech: ["Flutter", "ARKit/ARCore", "LLM", "Mapbox", "Python", "Docker", "NumPy", "Git"],
+    icon: MapPin, color: "from-teal-500 to-emerald-500",
+    screens: [
+      { title: "AR Camera", subtitle: "اطلاعات روی بنا", variant: "phone" },
+      { title: "Audio Guide", subtitle: "روایت تاریخی", variant: "phone" },
+      { title: "نقشه مسیر", subtitle: "Tour شخصی", variant: "phone" },
+    ],
+  },
+  {
+    slug: "agriculture-ai",
+    title: "اپ کشاورزی هوشمند",
+    cat: "کشاورزی",
+    short: "تشخیص بیماری گیاه از عکس برگ و توصیه سم و کود.",
+    longDesc: "اپ کمک به کشاورزان برای تشخیص ۳۰ بیماری شایع گیاهی از روی عکس برگ، پیشنهاد سم و کود مناسب، پیش‌بینی هوا و یادآور آبیاری. کاملاً فارسی و آفلاین.",
+    features: ["تشخیص بیماری از عکس", "توصیه سم و کود", "پیش‌بینی هوای محل", "یادآور آبیاری", "تقویم کاشت"],
+    tech: ["Flutter", "TFLite", "EfficientNet", "OpenWeather", "Python", "Docker", "NumPy", "Git"],
+    icon: Leaf, color: "from-green-500 to-emerald-500",
+    screens: [
+      { title: "اسکن برگ", subtitle: "تشخیص بیماری", variant: "phone" },
+      { title: "توصیه درمان", subtitle: "سم + کود", variant: "phone" },
+      { title: "تقویم کشاورز", subtitle: "یادآور هوشمند", variant: "phone" },
+    ],
+  },
+];
+
+export const getAppBySlug = (slug: string) => APPS.find((a) => a.slug === slug);

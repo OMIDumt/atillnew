@@ -1,0 +1,11 @@
+.git
+.gitignore
+.lovable
+.prettierignore
+.prettierrc
+node_modules
+bun.lock
+*.local
+dist
+.env.local
+.env.*.local
