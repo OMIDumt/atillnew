@@ -1,0 +1,8 @@
+name = "omidumt-atillai"
+main = "dist/server/server.js"
+compatibility_date = "2026-06-24"
+
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
