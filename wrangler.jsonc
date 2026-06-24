@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "omidumt-atillai",
+  "main": "@tanstack/react-start/server-entry",
+  "compatibility_date": "2026-06-24",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
