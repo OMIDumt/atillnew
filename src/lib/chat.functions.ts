@@ -47,6 +47,310 @@ const MODEL_CHAIN = [
 
 type LangKey = "fa" | "en" | "ar" | "tr";
 
+type FaqEntry = {
+  triggers: Record<LangKey, string[]>;
+  answer: Record<LangKey, string>;
+};
+
+const FAQ_ENTRIES: FaqEntry[] = [
+  {
+    triggers: {
+      fa: ["nilix چیست", "دستیار nilix", "نیلیکس چیست"],
+      en: ["what is nilix", "who is nilix", "nilix assistant"],
+      ar: ["ما هو nilix", "من هو nilix", "مساعد nilix"],
+      tr: ["nilix nedir", "kimdir nilix", "nilix asistan"],
+    },
+    answer: {
+      fa: "Nilix دستیار هوشمند چندزبانه ATiLLAi برای پاسخ به سوالات سایت و هدایت کاربران به خدمات صحیح است.",
+      en: "Nilix is ATiLLAi’s multilingual smart assistant for website questions and service guidance.",
+      ar: "Nilix هو المساعد الذكي متعدد اللغات لشركة ATiLLAi لأسئلة الموقع وتوجيه المستخدمين.",
+      tr: "Nilix, ATiLLAi’nin web sitesi soruları ve hizmet yönlendirmesi için çok dilli akıllı asistanıdır.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["چه خدماتی ارائه می‌دهید", "خدمات شما چیست", "خدمات atillai"],
+      en: ["what services do you offer", "services offered", "service list"],
+      ar: ["ما هي الخدمات التي تقدمونها", "الخدمات المتاحة", "خدمات atillai"],
+      tr: ["hangi hizmetleri sunuyorsunuz", "hizmetleriniz nedir", "atilai hizmetleri"],
+    },
+    answer: {
+      fa: "خدمات ATiLLAi شامل مشاوره خانواده و کودک، پایان‌نامه و مقاله علمی، پروژه‌های صنعتی، ساخت اپلیکیشن AI و چت‌بات سازمانی است.",
+      en: "ATiLLAi services include family and child consulting, thesis and academic papers, industrial AI projects, AI app development, and enterprise chatbots.",
+      ar: "تشمل خدمات ATiLLAi الاستشارات الأسرية والطفل، الرسائل العلمية، مشاريع الذكاء الصناعي الصناعية، تطوير تطبيقات AI، وروبوتات المحادثة المؤسسية.",
+      tr: "ATiLLAi hizmetleri arasında aile ve çocuk danışmanlığı، tez ve akademik makaleler، endüstriyel AI projeleri، AI uygulama geliştirme ve kurumsal chatbotlar bulunuyor.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["چه زبان هایی پشتیبانی می‌شود", "زبان های پشتیبانی", "support languages"],
+      en: ["what languages are supported", "supported languages", "language support"],
+      ar: ["ما هي اللغات المدعومة", "دعم اللغة", "لغات الدعم"],
+      tr: ["hangi diller destekleniyor", "dil desteği", "desteklenen diller"],
+    },
+    answer: {
+      fa: "Nilix از فارسی، انگلیسی، عربی و ترکی پشتیبانی می‌کند و زبان پیام را به صورت خودکار تشخیص می‌دهد.",
+      en: "Nilix supports Persian, English, Arabic, and Turkish, with automatic language detection.",
+      ar: "يدعم Nilix الفارسية والإنجليزية والعربية والتركية مع اكتشاف اللغة تلقائيًا.",
+      tr: "Nilix, Farsça, İngilizce, Arapça ve Türkçe’yi destekler و dili otomatik olarak algılar.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["هزینه پروژه", "قیمت پروژه", "تعرفه"],
+      en: ["project cost", "pricing", "how much does it cost"],
+      ar: ["تكلفة المشروع", "السعر", "كم يكلف"],
+      tr: ["proje maliyeti", "fiyat", "ne kadar"],
+    },
+    answer: {
+      fa: "هزینه پروژه بستگی به دامنه کار، پیچیدگی فنی و سطح پشتیبانی دارد. برای قیمت دقیق، با تلگرام یا /contact در ارتباط باشید.",
+      en: "Project cost depends on scope, technical complexity, and support level. For an exact quote, contact us via Telegram or /contact.",
+      ar: "تعتمد تكلفة المشروع على النطاق والتعقيد الفني ومستوى الدعم. للحصول على عرض دقيق، اتصل بنا عبر تيليجرام أو /contact.",
+      tr: "Proje maliyeti kapsam، teknik karmaşıklık ve destek seviyesine bağlıdır. Kesin teklif için Telegram üzerinden یا /contact ile iletişime geçin.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["شرایط پرداخت", "پرداخت چگونه است", "پیش پرداخت"],
+      en: ["payment terms", "how payment works", "deposit"],
+      ar: ["شروط الدفع", "كيف يتم الدفع", "دفعة مقدمة"],
+      tr: ["ödeme koşulları", "ödeme nasıl", "peşinat"],
+    },
+    answer: {
+      fa: "معمولاً ۳۰٪ پیش‌پرداخت، ۴۰٪ میان پروژه و ۳۰٪ تحویل نهایی است. برای پروژه‌های بزرگ قرارداد و اقساط توافقی هم امکان‌پذیر است.",
+      en: "Usually 30% deposit، 40% mid-project، and 30% on delivery. For large projects، formal contracts and installments are also possible.",
+      ar: "عادةً 30٪ دفعة مقدمة، 40٪ خلال المشروع، و30٪ عند التسليم. للمشاريع الكبيرة، يمكن ترتيب عقود وأقساط.",
+      tr: "Genellikle %30 peşinat، %40 proje ortası ve %30 teslimatta. Büyük projeler için sözleşme ve taksit seçeneği de mümkündür.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["زمان تحویل", "مدت زمان پروژه", "تحویل پروژه"],
+      en: ["delivery time", "project timeline", "how long does it take"],
+      ar: ["مدة التسليم", "مدة المشروع", "كم يستغرق"],
+      tr: ["teslim süresi", "proje süresi", "ne kadar sürer"],
+    },
+    answer: {
+      fa: "بسته به نوع پروژه: چت‌بات استاندارد ۷–۱۴ روز، چت‌بات هیبریدی ۳–۶ هفته، اپ AI ۶–۱۲ هفته، پایان‌نامه ۱–۳ ماه، مقاله ISI/Q1 ۲–۶ ماه.",
+      en: "Depending on the project: standard chatbot 7–14 days، hybrid chatbot 3–6 weeks، AI app 6–12 weeks، thesis 1–3 months، ISI/Q1 paper 2–6 months.",
+      ar: "يعتمد على المشروع: شات بوت عادي 7–14 يومًا، شات بوت هجين 3–6 أسابيع، تطبيق AI 6–12 أسبوعًا، أطروحة 1–3 أشهر، بحث ISI/Q1 2–6 أشهر.",
+      tr: "Projeye bağlı olarak: standart chatbot 7–14 gün، hibrit chatbot 3–6 hafta، AI uygulama 6–12 hafta، tez 1–3 ay، ISI/Q1 makale 2–6 ay.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["تخفیف دارید", "آیا تخفیف هست"],
+      en: ["do you offer discounts", "is there a discount"],
+      ar: ["هل يوجد خصم", "هل تقدمون خصومات"],
+      tr: ["indirim var mı", "indirim sunuyor musunuz"],
+    },
+    answer: {
+      fa: "بله. پکیج‌های ویژه برای دانشجویان، استارتاپ‌ها و پروژه‌های بلندمدت پیشنهاد می‌شود. برای جزئیات بیشتر تماس بگیرید.",
+      en: "Yes. Special packages are available for students، startups، and long-term projects. Contact us for details.",
+      ar: "نعم. هناك باقات خاصة للطلاب والشركات الناشئة والمشاريع طويلة الأجل. اتصل بنا لمزيد من التفاصيل.",
+      tr: "Evet. Öğrenciler، startup’lar ve uzun vadeli projeler için özel paketler var. Detaylar için iletişime geçin.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["پشتیبانی بعد از تحویل", "گارانتی", "پس از تحویل"],
+      en: ["support after delivery", "warranty", "after delivery support"],
+      ar: ["دعم بعد التسليم", "ضمان", "بعد التسليم"],
+      tr: ["teslim sonrası destek", "garanti", "teslimattan sonra"],
+    },
+    answer: {
+      fa: "بله. ۳ تا ۱۲ ماه پشتیبانی رایگان شامل رفع باگ و آپدیت امنیتی ارائه می‌شود. پس از آن می‌توان قرارداد SLA سالانه بست.",
+      en: "Yes. We offer 3–12 months of free support including bug fixes and security updates. After that، annual SLA contracts are available.",
+      ar: "نعم. نقدم دعمًا مجانيًا من 3 إلى 12 شهرًا يشمل إصلاح الأخطاء والتحديثات الأمنية. بعد ذلك، يمكن توقيع عقد SLA سنوي.",
+      tr: "Evet. 3–12 ay ücretsiz destek sağlanır; hata düzeltme ve güvenlik güncellemeleri dahildir. Sonrasında yıllık SLA sözleşmesi yapılabilir.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["پروژه شخصی سازی می شود", "شخصی سازی", "آیا اختصاصی است"],
+      en: ["is the project customized", "customization", "is it bespoke"],
+      ar: ["هل المشروع مخصص", "تخصيص", "هل هو خاص"],
+      tr: ["proje özelleştirilir mi", "özelleştirme", "özel mi"],
+    },
+    answer: {
+      fa: "بله. تمام پروژه‌ها ۱۰۰٪ اختصاصی هستند؛ معماری، UI/UX، پرامپت و دیتاست متناسب با کسب‌وکار شما طراحی می‌شود.",
+      en: "Yes. All projects are 100% custom; architecture، UI/UX، prompts، and datasets are tailored to your business.",
+      ar: "نعم. جميع المشاريع مخصصة بنسبة 100٪؛ يتم تصميم البنية وUI/UX وprompts وبيانات التدريب وفقًا لاحتياجاتك.",
+      tr: "Evet. Tüm projeler %100 özel hazırlanır; mimari، UI/UX، promptlar ve veri seti işinize göre uyarlanır.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["امنیت داده", "حریم خصوصی", "چطور داده ها را محافظت می کنید"],
+      en: ["data security", "privacy", "how do you protect data"],
+      ar: ["أمان البيانات", "الخصوصية", "كيف تحمون البيانات"],
+      tr: ["veri güvenliği", "gizlilik", "verileri nasıl koruyorsunuz"],
+    },
+    answer: {
+      fa: "امنیت داده شامل NDA، رمزنگاری، امکان استقرار On-Premise و انطباق با GDPR است. لاگ‌ها نیز قابل ممیزی هستند.",
+      en: "Data security includes NDA، encryption، on-premise deployment options، and GDPR alignment. Logs are auditable.",
+      ar: "أمان البيانات يشمل NDA، التشفير، إمكانية النشر داخل المؤسسة، والامتثال لـ GDPR. السجلات قابلة للتدقيق.",
+      tr: "Veri güvenliği NDA، şifreleme، on-premise dağıtım seçeneği ve GDPR uyumluluğunu içerir. Kayıtlar denetlenebilir.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["فرآیند کاری", "مراحل پروژه", "چطور کار می کنید"],
+      en: ["process", "project steps", "how do you work"],
+      ar: ["العملية", "خطوات المشروع", "كيف تعملون"],
+      tr: ["çalışma süreci", "proje adımları", "nasıl çalışıyorsunuz"],
+    },
+    answer: {
+      fa: "مراحل پروژه: نیازسنجی رایگان، پروپوزال، عقد قرارداد، توسعه چابک با گزارش هفتگی و تحویل با آموزش.",
+      en: "Project steps: free requirement session، proposal، contract، agile development with weekly reports، delivery and training.",
+      ar: "خطوات المشروع: جلسة احتياج مجانية، عرض، عقد، تطوير رشيق بتقارير أسبوعية، التسليم والتدريب.",
+      tr: "Proje adımları: ücretsiz ihtiyaç analizi، teklif، sözleşme، haftalık raporlu çevik geliştirme، teslim ve eğitim.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["اطلاعات اولیه", "چه اطلاعاتی نیاز دارید", "چه چیزی باید ارسال کنم"],
+      en: ["initial information", "what do you need", "what should I send"],
+      ar: ["المعلومات الأولية", "ماذا تحتاجون", "ماذا أرسل"],
+      tr: ["ilk bilgiler", "neye ihtiyacınız var", "ne göndermeliyim"],
+    },
+    answer: {
+      fa: "اطلاعات لازم: کسب‌وکار شما، هدف، KPIها، مخاطب، زبان، منابع محتوایی، محدودیت‌های فنی، بودجه و زمان.",
+      en: "Required info: your business، goals، KPIs، audience، language، content sources، technical limits، budget، and timeline.",
+      ar: "المطلوب: عملك، الأهداف، KPIs، الجمهور، اللغة، مصادر المحتوى، القيود الفنية، الميزانية، والجدول الزمني.",
+      tr: "Gerekli bilgiler: işiniz، hedefler، KPI’lar، hedef kitle، dil، içerik kaynakları، teknik sınırlamalar، bütçe ve zaman çizelgesi.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["خانواده", "مشاوره خانواده", "کودک"],
+      en: ["family consulting", "child consulting", "family services"],
+      ar: ["استشارات الأسرة", "استشارات الطفل", "خدمات العائلة"],
+      tr: ["aile danışmanlığı", "çocuk danışmanlığı", "aile hizmetleri"],
+    },
+    answer: {
+      fa: "خدمات خانواده شامل زوج‌درمانی، تعارض والدین/فرزند، مشاوره طلاق و مدیریت بحران حضوری و آنلاین است.",
+      en: "Family services include couples therapy، parent-child conflict resolution، divorce support، and crisis management online or in person.",
+      ar: "تشمل خدمات الأسرة العلاج الزوجي، صراعات الوالدين/الطفل، استشارات الطلاق، وإدارة الأزمات حضوريًا أو عبر الإنترنت.",
+      tr: "Aile hizmetleri arasında çift terapisi، ebeveyn-çocuk çatışması çözümü، boşanma desteği ve kriz yönetimi çevrimiçi veya yüz yüze yer alır.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["تربیت دیجیتال", "مدیریت فضای مجازی", "بچه ها و اینترنت"],
+      en: ["digital parenting", "digital discipline", "kids and internet"],
+      ar: ["التربية الرقمية", "إدارة الإنترنت للأطفال", "الأطفال والفضاء الرقمي"],
+      tr: ["dijital ebeveynlik", "çocuklar ve internet", "dijital eğitim"],
+    },
+    answer: {
+      fa: "تربیت دیجیتال شامل مدیریت استفاده آگاهانه از شبکه‌های اجتماعی، بازی و AI، قرارداد خانواده، ارزیابی وابستگی و سواد رسانه‌ای است.",
+      en: "Digital parenting includes mindful use of social media، games، and AI، family agreements، dependency assessment، and media literacy.",
+      ar: "تشمل التربية الرقمية الاستخدام الواعي لوسائل التواصل الاجتماعي والألعاب وAI، واتفاقيات عائلية، وتقييم الاعتماد، ومحو الأمية الإعلامية.",
+      tr: "Dijital ebeveynlik، sosyal medya، oyun ve AI’nin bilinçli kullanımı، aile sözleşmeleri، bağımlılık değerlendirmesi ve medya okuryazarlığını içerir.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["پایان نامه", "مقاله isi", "مقاله q1"],
+      en: ["thesis", "isi paper", "q1 paper"],
+      ar: ["أطروحة", "بحث ISI", "بحث Q1"],
+      tr: ["tez", "ISI makale", "Q1 makale"],
+    },
+    answer: {
+      fa: "خدمات پایان‌نامه و مقاله شامل انتخاب موضوع، طراحی متد، تحلیل داده، نگارش، ویرایش و آماده‌سازی دفاع یا سابمیت است.",
+      en: "Thesis and paper services include topic selection، methodology، data analysis، writing، editing، and defense/submission preparation.",
+      ar: "تشمل خدمات الأطروحة والبحث اختيار الموضوع، المنهجية، تحليل البيانات، الكتابة، التحرير، وإعداد الدفاع أو التقديم.",
+      tr: "Tez ve makale hizmetleri konu seçimi، metodoloji، veri analizi، yazım، düzenleme ve savunma/başvuru hazırlığını içerir.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["پروژه صنعتی", "پروژه سازمانی", "صنعتی"],
+      en: ["industrial project", "enterprise project", "industrial AI"],
+      ar: ["مشروع صناعي", "مشروع مؤسسي", "الذكاء الصناعي الصناعي"],
+      tr: ["endüstriyel proje", "kurumsal proje", "endüstriyel AI"],
+    },
+    answer: {
+      fa: "برای پروژه‌های صنعتی خدمات Predictive Maintenance، Computer Vision، BI، RPA و یکپارچه‌سازی ERP/CRM ارائه می‌شود.",
+      en: "For industrial projects we offer predictive maintenance، computer vision، BI، RPA، and ERP/CRM integration.",
+      ar: "لمشاريع الصناعة نقدم الصيانة التنبؤية، الرؤية الحاسوبية، BI، RPA، وتكامل ERP/CRM.",
+      tr: "Endüstriyel projeler için kestirimci bakım، bilgisayarla görme، BI، RPA ve ERP/CRM entegrasyonu sunuyoruz.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["اپلیکیشن ai", "ساخت اپلیکیشن", "اپ هوش مصنوعی"],
+      en: ["AI app", "build app", "application development"],
+      ar: ["تطبيق AI", "بناء تطبيق", "تطوير التطبيق"],
+      tr: ["AI uygulaması", "uygulama geliştirme", "uygulama yapımı"],
+    },
+    answer: {
+      fa: "اپ AI شامل وب، موبایل، بک‌اند و ML است. از React، Flutter، Python و Node.js برای پیاده‌سازی استفاده می‌کنیم.",
+      en: "AI app development includes web، mobile، backend، and ML. We use React، Flutter، Python، and Node.js.",
+      ar: "يشمل تطوير تطبيق AI الويب، الجوال، الباك-إند، وML. نستخدم React وFlutter وPython وNode.js.",
+      tr: "AI uygulama geliştirme web، mobil، backend ve ML’i kapsar. React، Flutter، Python ve Node.js kullanıyoruz.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["چت بات سازمانی", "llm فارسی", "rag"],
+      en: ["enterprise chatbot", "Persian LLM", "RAG chatbot"],
+      ar: ["دردشة مؤسسية", "LLM فارسي", "RAG"],
+      tr: ["kurumsal chatbot", "Farsça LLM", "RAG"],
+    },
+    answer: {
+      fa: "چت‌بات سازمانی شامل LLM فارسی، RAG روی داده‌های خصوصی، چندزبانگی، حافظه چندمرحله‌ای و یکپارچه‌سازی پیام‌رسان است.",
+      en: "The enterprise chatbot includes a Persian-capable LLM، RAG on private data، multilingual support، multi-step memory، and messenger integration.",
+      ar: "يتضمن روبوت الدردشة المؤسسي LLM يدعم الفارسية، RAG على البيانات الخاصة، دعم متعدد اللغات، ذاكرة متعددة الخطوات، وتكامل المراسلة.",
+      tr: "Kurumsal chatbot، Farsça destekli LLM، özel veriler üzerinde RAG، çok dilli destek، çok adımlı bellek ve mesajlaşma entegrasyonu içerir.",
+    },
+  },
+  {
+    triggers: {
+      fa: ["ارتباط با کارشناس", "تماس با کارشناس", "راه‌های ارتباط"],
+      en: ["contact expert", "how to contact", "contact methods"],
+      ar: ["التواصل مع خبير", "كيفية الاتصال", "طرق الاتصال"],
+      tr: ["uzmanla iletişim", "nasıl iletişim kurulur", "iletişim yolları"],
+    },
+    answer: {
+      fa: "برای ارتباط: تلگرام @MahdiPourabdollah_Ai، تلفن 09105557133 / 09901377895، ایمیل Atilla.DatascienceGroup.1401@gmail.com، یا فرم /contact.",
+      en: "To contact us: Telegram @MahdiPourabdollah_Ai، phone +98 910 555 7133 / +98 990 137 7895، email Atilla.DatascienceGroup.1401@gmail.com، or /contact.",
+      ar: "للتواصل: تيليجرام @MahdiPourabdollah_Ai، هاتف +98 910 555 7133 / +98 990 137 7895، بريد Atilla.DatascienceGroup.1401@gmail.com، أو /contact.",
+      tr: "İletişim için: Telegram @MahdiPourabdollah_Ai، telefon +98 910 555 7133 / +98 990 137 7895، e-posta Atilla.DatascienceGroup.1401@gmail.com veya /contact.",
+    },
+  },
+];
+
+function normalizeText(text: string) {
+  return String(text || "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/\u200c/g, " ")
+    .replace(/[^\w\u0600-\u06FF\u0621-\u064A\u0660-\u0669\u00C0-\u017F\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function matchesTrigger(message: string, trigger: string) {
+  const text = normalizeText(message);
+  const pattern = normalizeText(trigger);
+  if (!pattern) return false;
+  if (text.includes(pattern)) return true;
+  const tokens = pattern.split(" ").filter(Boolean);
+  return tokens.length > 2 && tokens.every((token) => text.includes(token));
+}
+
+function findFaqAnswer(message: string, lang: LangKey): string | null {
+  for (const entry of FAQ_ENTRIES) {
+    for (const trigger of entry.triggers[lang]) {
+      if (matchesTrigger(message, trigger)) {
+        return entry.answer[lang];
+      }
+    }
+  }
+  return null;
+}
+
 function detectLang(text: string): LangKey {
   const t = text || "";
   if (/[\u0600-\u06FF]/.test(t)) {
@@ -63,6 +367,8 @@ function smartFallback(messages: ChatMessage[]): string {
   const q = last.toLowerCase();
   const langHint = /\[lang=(fa|en|ar|tr)\]/i.exec(last)?.[1] as LangKey | undefined;
   const lang: LangKey = langHint ?? detectLang(last);
+  const faqAnswer = findFaqAnswer(last, lang);
+  if (faqAnswer) return faqAnswer;
 
   const intents = [
     { key: "price", fa: /قیمت|هزینه|تعرفه|چقدر/, en: /price|cost|how much|pricing/, ar: /سعر|تكلفة|كم/, tr: /fiyat|ücret|maliyet|ne kadar/ },
